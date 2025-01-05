@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Fetch Take Home</string>
+    <string name="items_list">Items list</string>
+    <string name="item_image">Item image</string>
+    <string name="list_group_id">List Group ID</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_id">Item ID</string>
 </resources>

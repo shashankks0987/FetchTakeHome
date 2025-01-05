@@ -5,4 +5,6 @@
     <string name="list_group_id">List Group ID</string>
     <string name="item_name">Item Name</string>
     <string name="item_id">Item ID</string>
+    <string name="name">Name: %1$s</string>
+    <string name="id">ID: %1$s</string>
 </resources>

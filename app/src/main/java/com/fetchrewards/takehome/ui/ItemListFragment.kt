@@ -3,25 +3,21 @@ package com.fetchrewards.takehome.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.fetchrewards.takehome.R
-import com.fetchrewards.takehome.repository.ItemRepository
-import kotlinx.coroutines.launch
+import androidx.fragment.app.activityViewModels
 
 class ItemListFragment: Fragment(R.layout.item_list_fragment) {
-    val repository by lazy {
-        ItemRepository()
-    }
+    private val itemViewModel: ItemViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val groupRecyclerView: RecyclerView = view.findViewById(R.id.groupRecyclerView)
 
-        lifecycleScope.launch {
-            val groupedItems = repository.getGroupedItems()
+        itemViewModel.groupedItems.observe(viewLifecycleOwner){groupedItems ->
             groupRecyclerView.adapter = GroupAdapter(groupedItems)
         }
+
     }
 }

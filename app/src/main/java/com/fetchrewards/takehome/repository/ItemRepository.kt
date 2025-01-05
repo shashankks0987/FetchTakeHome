@@ -19,6 +19,7 @@ class ItemRepository {
     suspend fun getGroupedItems():  Map<Int, List<Item>> {
         val items = getItems()
         return items?.filter { !it.name.isNullOrEmpty() }
+            ?.sortedWith(compareBy<Item> { it.listId }.thenBy { it.name })
             ?.groupBy { it.listId } ?: emptyMap()
     }
 }

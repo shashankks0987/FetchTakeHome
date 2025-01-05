@@ -1,11 +1,15 @@
 package com.fetchrewards.takehome.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.fetchrewards.takehome.IOUtil
 import com.fetchrewards.takehome.R
 import com.fetchrewards.takehome.model.Item
+import kotlinx.coroutines.launch
 
 class ItemListFragment: Fragment(R.layout.item_list_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,5 +30,14 @@ class ItemListFragment: Fragment(R.layout.item_list_fragment) {
         val groupRecyclerView: RecyclerView = view.findViewById(R.id.groupRecyclerView)
         groupRecyclerView.adapter = GroupAdapter(groupedItems)
 
+        lifecycleScope.launch {
+            val response = IOUtil.itemService.getItem()
+            if (response.isSuccessful) {
+                val item = response.body()
+                Log.e("Fragment", item.toString())
+            } else {
+                Log.e("Fragment", "Error")
+            }
+        }
     }
 }
